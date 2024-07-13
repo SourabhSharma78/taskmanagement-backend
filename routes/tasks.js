@@ -28,7 +28,7 @@ router.post('/tasksData', async (req, res) => {
     }
 });
 
-// DELETE route to delete a task by id
+// PUT route to update tasks (couldn't complete it's integration in frontend but will be doing soon )
 router.put('/:id', async (req, res) => {
     try {
 
