@@ -5,7 +5,7 @@ const Task = require('../models/task');
 // GET route to retrieve all tasks
 router.get('/', async (req, res) => {
     try {
-        const tasks = await Task.find();
+        const tasks = await Task.find({});
         res.json(tasks);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -30,10 +30,26 @@ router.post('/tasksData', async (req, res) => {
 
 // PUT route to update tasks (couldn't complete it's integration in frontend but will be doing soon )
 router.put('/:id', async (req, res) => {
-    try {
+          
+});
 
-        // update task as completed
-        const task = await Task.findByIdAndUpdate(
+//delete route 
+router.delete('/tasksData/:id', async (req, res) => {
+    try {
+        const task = await Task.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Task deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error deleting task' });
+    }
+});
+
+//completion route 
+
+router.patch('/tasksData/:id', async (req, res) => {
+    try {
+         // update task as completed
+         const task = await Task.findByIdAndUpdate(
             req.params.id,
             { $set: { completed: true } },
             { new: true }
